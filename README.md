@@ -17,7 +17,7 @@ The sections of the assessment are:
 - Clustering
 
 **Note on the short answer questions**: 
-> Please use your own words, even if you consult another source to help you craft your response. Short answer questions are not necessarily being assessed on grammatical correctness or sentence structure, but do your best to communicate your answers clearly. 
+> Please use your own words, even if you consult another source to help you craft your response. Short answer questions are not necessarily being assessed on grammatical correctness or sentence structure, but do your best to communicate your answers clearly!
 
 
 ## Decision Trees
@@ -394,8 +394,7 @@ _Hint: To create the plot, pass the appropriate parameters to the function above
 
 
 ```python
-# Create plot 
-None
+# Your code here.
 ```
 
 
@@ -531,7 +530,7 @@ print(classification_report(y_test, y_pred))
 ### Clustering Algorithms: k-means and hierarchical agglomerative clustering
 
 **1) Using the gif below for reference, describe the steps of the k-means clustering algorithm. Compare to the way clusters are created using hierarchical agglomerative clustering.** 
-* If the gif doesn't run, you may access it via [this link](https://github.com/learn-co-curriculum/dsc-module-5-assessment/blob/wip/images/good-centroid-start.gif).
+* If the gif doesn't run, you may access it via [this link](https://github.com/learn-co-students/dsc-k-means-clustering-data-science/blob/master/images/good-centroid-start.gif).
 
 <img src='images/good-centroid-start.gif'>
 
@@ -587,15 +586,8 @@ _Hints: What imports do you need? Do you need to pre-process the data in any way
 
 
 ```python
+# Your code here
 
-```
-
-
-```python
-# Your code here 
-
-
-# Create empty list for silhouette scores 
 silhouette_scores= []
 
 for k in range(2, 10):
@@ -606,7 +598,7 @@ for k in range(2, 10):
     silhouette_scores.append(score)
 ```
 
-In the cell below, we plot the silhouette scores obtained for each different value of k against k, the number of clusters we asked the algorithm to find. 
+Run the cell below to plot the silhouette scores obtained for each different value of k against k, the number of clusters we asked the algorithm to find. 
 
 
 ```python
