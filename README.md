@@ -191,7 +191,7 @@ def get_best_param(mse_scores, hyperparameter_values):
 **2) Find the best hyperparameters and print them out.** 
 * Place the best `max_depth` in a variable called `best_max_depth`
 * Place the best `min_samples_split` in a variable called `best_min_samples_split`
-* Place the best `min_samples_leaf` in a variable called `best_min_samples_leaf`.**
+* Place the best `min_samples_leaf` in a variable called `best_min_samples_leaf`.
 
 
 ```python
