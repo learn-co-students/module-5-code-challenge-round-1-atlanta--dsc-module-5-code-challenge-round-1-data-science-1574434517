@@ -29,7 +29,7 @@ The diagrams below show the result of splitting the dataset by attribute: the di
 
 <img src="images/decision_stump.png">
 
-**1) Which one of the two attributes resulted in the best split of the original data? How do you select the best attribute to split a tree at each node? (mention splitting criteria)**
+**1.1) Which one of the two attributes resulted in the best split of the original data? How do you select the best attribute to split a tree at each node?** _(Hint: Mention splitting criteria)_
 
 
 ```python
@@ -86,7 +86,7 @@ X = df[df.columns.difference(['PE'])]
 y = df['PE']
 ```
 
-**1) Split the data into training and test sets. Create training and test sets with `test_size=0.5` and `random_state=0.1`.** 
+**1.2) Split the data into training and test sets. Create training and test sets with `test_size=0.5` and `random_state=0.1`.** 
 
 
 ```python
@@ -95,16 +95,14 @@ y = df['PE']
 X_train, X_test, y_train, y_test = None
 ```
 
-**2) Fit a vanilla decision tree regression model with scikit-learn to the training data.** Set `random_state = 1` for reproducibility. **Evaluate the model on the test data.** 
+**1.3) Fit a vanilla decision tree regression model with scikit-learn to the training data.** Set `random_state = 1` for reproducibility. **Evaluate the model on the test data.** 
 
 
 ```python
 # Your code here 
 ```
 
-**3) Obtain the mean squared error, mean absolute error, and coefficient of determination (r2 score) of the predictions on the test set.**
-
-_Hint: Look at the `sklearn.metrics` module._
+**1.4) Obtain the mean squared error, mean absolute error, and coefficient of determination (r2 score) of the predictions on the test set.** _Hint: Look at the `sklearn.metrics` module._
 
 
 ```python
@@ -163,7 +161,7 @@ min_samples_leafs = np.arange(5, 100, 5)
 
 Next, you'll obtain model performance on the test dataset for models fit to the training data using the different hyperparameters.
 
-**1) Create three variables, one for each hyperparameter you'll tune, that contain a list of the mean squared errors obtained by evaluating the trained models on the test data as hyperparameter values are changed.** 
+**1.5) Create three variables, one for each hyperparameter you'll tune, that contain a list of the mean squared errors obtained by evaluating the trained models on the test data as hyperparameter values are changed.** 
 
 _Hint: Set these variables equal to the result of the function call, for the hyperparameters `max_depth`, `min_samples_split`, `min_samples_leaf` respectively._
 
@@ -188,9 +186,9 @@ def get_best_param(mse_scores, hyperparameter_values):
     return hyperparameter_values[ix]
 ```
 
-**2) Find the best hyperparameters and print them out.** 
-* Place the best `max_depth` in a variable called `best_max_depth`
-* Place the best `min_samples_split` in a variable called `best_min_samples_split`
+**1.6) Find the best hyperparameters and print them out.** 
+* Place the best `max_depth` in a variable called `best_max_depth`.
+* Place the best `min_samples_split` in a variable called `best_min_samples_split`.
 * Place the best `min_samples_leaf` in a variable called `best_min_samples_leaf`.
 
 
@@ -206,7 +204,7 @@ print("The best min_samples_split found is:", best_min_samples_split)
 print("The best min_samples_leaf found is:", best_min_samples_leaf)
 ```
 
-**3) Use the optimal hyperparameters to fit a decision tree regression model to the training data.** Call the model `dt_tuned`.  Use `random_state = 1` for reproducibility.
+**1.7) Use the optimal hyperparameters to fit a decision tree regression model to the training data.** Call the model `dt_tuned`.  Use `random_state = 1` for reproducibility.
 
 
 ```python
@@ -217,7 +215,7 @@ dt_tuned = None
 dt_tuned.fit(None, None)
 ```
 
-**4) Evaluate the model's performance (mean squared error, mean absolute error, and coefficient of determination) on the test data. Did tuning the model hyperparameters improve model performance on the test dataset compared to the vanilla decision tree you trained?** 
+**1.8) Evaluate the model's performance (mean squared error, mean absolute error, and coefficient of determination) on the test data. Did tuning the model hyperparameters improve model performance on the test dataset compared to the vanilla decision tree you trained?** 
 
 
 ```python
@@ -239,7 +237,7 @@ print("R-squared:", None)
 
 ### Introduction to Ensemble Methods
 
-**1) Explain how the random forest algorithm works. Why are random forests resilient to overfitting?**
+**2.1) Explain how the random forest algorithm works. Why are random forests resilient to overfitting?**
 
 _Hint: Your answer should discuss bagging and the subspace sampling method._
 
@@ -296,7 +294,7 @@ y.value_counts().sort_index()
 
 You will now perform hyper-parameter tuning for a Random Forest classifier.
 
-**1) Use the following parameters to construct the `param_grid` dictionary to pass to `GridSearchCV` when instantiating the object.** 
+**2.2) Use the following parameters to construct the `param_grid` dictionary to pass to `GridSearchCV` when instantiating the object.** 
 
 * `n_estimators`: 5, 10, 20, and 30
 * `max_features`: 'auto', 'sqrt', 'log2'
@@ -319,7 +317,7 @@ from sklearn.ensemble import RandomForestClassifier
 from sklearn.model_selection import GridSearchCV
 ```
 
-**2) Create an instance of a Random Forest classifier estimator; call it `rfc`.** Make sure to set `random_state=42` for reproducibility. 
+**2.3) Create an instance of a Random Forest classifier estimator; call it `rfc`.** Make sure to set `random_state=42` for reproducibility. 
 
 
 ```python
@@ -327,7 +325,7 @@ from sklearn.model_selection import GridSearchCV
 rfc = None
 ```
 
-**3) Create an instance of an `GridSearchCV` object and fit it to the data.** Call the instance `cv_rfc`. 
+**2.4) Create an instance of an `GridSearchCV` object and fit it to the data.** Call the instance `cv_rfc`. 
 
 * Use the random forest classification estimator you instantiated in the cell above, the parameter grid dictionary constructed, and make sure to perform 5-fold cross validation. 
 * The fitting process should take 10 - 15 seconds to complete. 
@@ -340,7 +338,7 @@ cv_rfc = None
 cv_rfc.fit(None, None)
 ```
 
-**4) What are the best training parameters found by GridSearchCV?** 
+**2.5) What are the best training parameters found by GridSearchCV?** 
 
 _Hint: Explore the documentation for GridSearchCV._ 
 
@@ -388,7 +386,7 @@ def create_plot_of_feature_importances(model, X):
     plt.xlabel('importance')
 ```
 
-**5) Create a plot of the best model's feature importances. What are this model's top 3 features in order of descending importance?** 
+**2.6) Create a plot of the best model's feature importances. What are this model's top 3 features in order of descending importance?** 
 
 _Hint: To create the plot, pass the appropriate parameters to the function above._
 
@@ -425,7 +423,7 @@ y.name = 'class'
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.3, random_state=42)
 ```
 
-**1) Fit PCA to the training data.** 
+**3.1) Fit PCA to the training data.** 
 
 Call the PCA instance you'll create `wine_pca`. Set `n_components=0.9` and make sure to use `random_state = 42`.
 
@@ -436,7 +434,7 @@ _Hint: Make sure to include necessary imports for preprocessing the data!_
 # Your code here 
 ```
 
-**2) What is the meaning of setting `n_components` to 0.9?** 
+**3.2) What is the meaning of setting `n_components` to 0.9?** 
 
 _Hint: Look at the documentation for `PCA` in scikit-learn._
 
@@ -445,7 +443,7 @@ _Hint: Look at the documentation for `PCA` in scikit-learn._
 # Your answer here
 ```
 
-**3) How many principal components are there in the fitted PCA object?**
+**3.3) How many principal components are there in the fitted PCA object?**
 
 _Hint: Look at the list of attributes of trained `PCA` objects in the scikit-learn documentation_
 
@@ -459,7 +457,7 @@ Next, you'll reduce the dimensionality of the training data to the number of com
 
 You'll compare the performance of the model trained on the PCA-extracted features to the performance of a model trained using all features without feature extraction.
 
-**4) Transform the training features into an array of reduced dimensionality using the `wine_pca` PCA object you've fit in the previous cell.** Call this array `X_train_pca`.
+**3.4) Transform the training features into an array of reduced dimensionality using the `wine_pca` PCA object you've fit in the previous cell.** Call this array `X_train_pca`.
 
 
 ```python
@@ -480,7 +478,7 @@ X_train_pca.head()
 
 You will now use the PCA-extracted features to train a random forest classification model.
 
-**5) Instantiate a vanilla Random Forest Classifier (call it `rfc`) and fit it to the transformed training data.** Set `random_state = 42`. 
+**3.5) Instantiate a vanilla Random Forest Classifier (call it `rfc`) and fit it to the transformed training data.** Set `random_state = 42`. 
 
 
 ```python
@@ -489,7 +487,7 @@ rfc = None
 rfc.fit(None, None)
 ```
 
-**6) Evaluate model performance on the test data and place model predictions in a variable called `y_pca_pred`.**
+**3.6) Evaluate model performance on the test data and place model predictions in a variable called `y_pca_pred`.**
 
 _Hint: Make sure to transform the test data the same way as you transformed the training data!!!_
 
@@ -518,7 +516,7 @@ y_pred = vanilla_rfc.predict(X_test)
 print(classification_report(y_test, y_pred))
 ```
 
-**7) Compare model performance. Did the overall accuracy of the model improve when using the transformed features?**
+**3.7) Compare model performance. Did the overall accuracy of the model improve when using the transformed features?**
 
 
 ```python
@@ -529,8 +527,8 @@ print(classification_report(y_test, y_pred))
 
 ### Clustering Algorithms: k-means and hierarchical agglomerative clustering
 
-**1) Using the gif below for reference, describe the steps of the k-means clustering algorithm. Compare to the way clusters are created using hierarchical agglomerative clustering.** 
-* If the gif doesn't run, you may access it via [this link](https://github.com/learn-co-students/dsc-k-means-clustering-data-science/blob/master/images/good-centroid-start.gif).
+**4.1) Using the gif below for reference, describe the steps of the k-means clustering algorithm. Compare to the way clusters are created using hierarchical agglomerative clustering.** 
+* If the gif doesn't run, you may access it via [this link](https://github.com/learn-co-curriculum/dsc-module-5-assessment/blob/master/images/good-centroid-start.gif).
 
 <img src='images/good-centroid-start.gif'>
 
@@ -556,7 +554,7 @@ wine = load_wine()
 X = pd.DataFrame(X, columns = wine.feature_names)
 ```
 
-**1) Write a function called `get_labels` that will find `k` clusters in a dataset of features `X`, and return the labels for each row of `X`.**
+**4.2) Write a function called `get_labels` that will find `k` clusters in a dataset of features `X`, and return the labels for each row of `X`.**
 
 _Hint: Within the function, you'll need to:_
 * _instantiate a k-means clustering model (use `random_state = 1` for reproducibility),_ 
@@ -578,7 +576,7 @@ def get_labels(k, X):
     pass 
 ```
 
-**2) Fit the k-means algorithm to the wine data for k values in the range 2 to 9 using the function you've written above. Obtain the silhouette scores for each trained k-means clustering model, and place the values in a list called `silhouette_scores`.** 
+**4.3) Fit the k-means algorithm to the wine data for k values in the range 2 to 9 using the function you've written above. Obtain the silhouette scores for each trained k-means clustering model, and place the values in a list called `silhouette_scores`.** 
 
 We have provided you with some starter code in the cell below.
 
@@ -608,7 +606,7 @@ plt.xlabel('k (number of clusters)')
 plt.ylabel('silhouette score')
 ```
 
-**3) Which value of k would you choose based on the plot of silhouette scores? How does this number compare to the number of classes in the wine dataset?**
+**4.4) Which value of k would you choose based on the plot of silhouette scores? How does this number compare to the number of classes in the wine dataset?**
 
 
 ```python
