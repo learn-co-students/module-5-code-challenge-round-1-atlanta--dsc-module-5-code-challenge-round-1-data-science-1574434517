@@ -86,7 +86,7 @@ X = df[df.columns.difference(['PE'])]
 y = df['PE']
 ```
 
-**1.2) Split the data into training and test sets. Create training and test sets with `test_size=0.5` and `random_state=0.1`.** 
+**1.2) Split the data into training and test sets. Create training and test sets with `test_size=0.5` and `random_state=1`.** 
 
 
 ```python
