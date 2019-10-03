@@ -23,9 +23,9 @@ The sections of the assessment are:
 ## Decision Trees
 
 ### Concepts 
-You're given a dataset of 30 elements, 15 of which belong to a positive class (denoted by **+**) and 15 of which do not (denoted by **-**). These elements are described by two attributes, A and B, that can each have either one of two values, true or false. 
+You're given a dataset of **30** elements, 15 of which belong to a positive class (denoted by *`+`* ) and 15 of which do not (denoted by `-`). These elements are described by two attributes, A and B, that can each have either one of two values, true or false. 
 
-The diagrams below show the result of splitting the dataset by attribute: the diagram on the left hand side shows the class distribution of elements obtained when splitting the data by attribute A, and the diagram of the right hand side shows the class distribution of elements obtained when splitting the data by attribute B. 
+The diagrams below show the result of splitting the dataset by attribute: the diagram on the left hand side shows that if we split by Attribute A there are 13 items of the positive class and 2 of the negative class in one branch and 2 of the positive and 13 of the negative in the other branch. The right hand side shows that if we split the data by Attribute B there are 8 items of the positive class and 7 of the negative class in one branch and 7 of the positive and 8 of the negative in the other branch.
 
 <img src="images/decision_stump.png">
 
@@ -113,124 +113,24 @@ print("Mean Absolute Error:", None)
 print("R-squared:", None)
 ```
 
+Hint: MSE = 22.21041691053512
+
 ### Hyperparameter Tuning of Decision Trees for Regression
 
-Next, you'll find the optimal `max_depth`, `min_samples_leaf`, and `min_samples_split` hyperparameters for a decision tree regression model. You'll use the same data as in the previous question.
+For this next section feel free to refer to the scikit learn documentation on [decision tree regressors](https://scikit-learn.org/stable/modules/generated/sklearn.tree.DecisionTreeRegressor.html)
 
-In the cell below, we have provided you with a function, `evaluate_performance_with_different_hyperparameters`. 
+**1.5) Add hyperparameters to a a new decision tree and fit it to our training data and evaluate the model with the test data.**
 
 
 ```python
-def evaluate_performance_with_different_hyperparameters(hyperparameter_name, hyperparameter_values):
-    
-    mses_test = []
-    
-    for value in hyperparameter_values:
-        if hyperparameter_name == 'max_depth':
-            dt = DecisionTreeRegressor(max_depth=value, random_state=1)
-        elif hyperparameter_name == 'min_samples_split':
-            dt = DecisionTreeRegressor(min_samples_split=value, random_state=1)
-        else:
-            dt = DecisionTreeRegressor(min_samples_leaf=value, random_state=1)
-        dt.fit(X_train, y_train)
-        y_pred = dt.predict(X_test)
-        mse_test = mean_squared_error(y_test, y_pred)
-        mses_test.append(mse_test)
-        
-    return mses_test
+# Your code here 
 ```
 
-This function loops through all possible hyperparameter values in the array `hyperparameter_values`, fits a model with each one of hyperparameter values using the training dataset, and evaluates the trained model performance on the test data. It uses the mean squared error metric to evaluate model performance. 
-* Note that you only need to pass the hyperparameter name as a string and a list of hyperparameter values to this function to obtain a list of mean squared error scores for each of the models trained using the different hyperparameter values. 
-
-After you have obtained model performance on test data, you will select the best `max_depth`, `min_samples_leaf`, and `min_samples_split`, train a new model using the best of these hyperparameters, and evaluate model performance. 
-
-In the cell below, we create three variables for you, one for each hyperparameter you'll tune, that contain the hyperparameter values we want to train our models with. 
+**1.6) Obtain the mean squared error, mean absolute error, and coefficient of determination (r2 score) of the predictions on the test set. Did this improve your previous model? (It's ok if it didn't)**
 
 
 ```python
-# max_depth
-max_depths = np.arange(1, 21)
-
-# min_samples_split
-min_samples_splits = np.arange(5, 100, 5)
-
-# min_samples_leaf
-min_samples_leafs = np.arange(5, 100, 5)
-```
-
-Next, you'll obtain model performance on the test dataset for models fit to the training data using the different hyperparameters.
-
-**1.5) Create three variables, one for each hyperparameter you'll tune, that contain a list of the mean squared errors obtained by evaluating the trained models on the test data as hyperparameter values are changed.** 
-
-_Hint: Set these variables equal to the result of the function call, for the hyperparameters `max_depth`, `min_samples_split`, `min_samples_leaf` respectively._
-
-
-```python
-# Replace None with appropriate code
-
-mses_test_depths = None
-mses_test_splits = None 
-mses_test_leafs = None 
-```
-
-Now that you have evaluated model performance using different hyperparameters, you will select the best hyperparameter to use and train a new model using these hyperparameters.
-
-We have provided you with a function `get_best_param` in the cell below so you can get the best hyperparameter of interest given a list of mean squared errors and a list of hyperparameter values. 
-
-
-```python
-def get_best_param(mse_scores, hyperparameter_values):
-    # get index of minimum mse scores 
-    ix = np.argmin(mse_scores)
-    return hyperparameter_values[ix]
-```
-
-**1.6) Find the best hyperparameters and print them out.** 
-* Place the best `max_depth` in a variable called `best_max_depth`.
-* Place the best `min_samples_split` in a variable called `best_min_samples_split`.
-* Place the best `min_samples_leaf` in a variable called `best_min_samples_leaf`.
-
-
-```python
-# Replace None with appropriate code
-
-best_max_depth = None
-best_min_samples_split = None
-best_min_samples_leaf = None
-
-print("The best max_depth found is:", best_max_depth)
-print("The best min_samples_split found is:", best_min_samples_split)
-print("The best min_samples_leaf found is:", best_min_samples_leaf)
-```
-
-**1.7) Use the optimal hyperparameters to fit a decision tree regression model to the training data.** Call the model `dt_tuned`.  Use `random_state = 1` for reproducibility.
-
-
-```python
-# Replace None with appropriate code 
-
-dt_tuned = None
-
-dt_tuned.fit(None, None)
-```
-
-**1.8) Evaluate the model's performance (mean squared error, mean absolute error, and coefficient of determination) on the test data. Did tuning the model hyperparameters improve model performance on the test dataset compared to the vanilla decision tree you trained?** 
-
-
-```python
-# Replace None with appropriate code 
-
-y_pred_tuned = dt_tuned.predict(None)
-
-print("Mean Squared Error:", None)
-print("Mean Absolute Error:", None)
-print("R-squared:", None)
-```
-
-
-```python
-# Your answer here
+# Your answer and explanation here
 ```
 
 ## Ensemble Methods
@@ -294,12 +194,7 @@ y.value_counts().sort_index()
 
 You will now perform hyper-parameter tuning for a Random Forest classifier.
 
-**2.2) Use the following parameters to construct the `param_grid` dictionary to pass to `GridSearchCV` when instantiating the object.** 
-
-* `n_estimators`: 5, 10, 20, and 30
-* `max_features`: 'auto', 'sqrt', 'log2'
-* `max_depth`: 4, 5, and 6
-* `criterion`: 'gini' and 'entropy' 
+**2.2) Construct a `param_grid` dictionary to pass to `GridSearchCV` when instantiating the object. Choose at least 3 hyper-parameters to tune and 3 values for each.** 
 
 
 ```python
@@ -386,7 +281,7 @@ def create_plot_of_feature_importances(model, X):
     plt.xlabel('importance')
 ```
 
-**2.6) Create a plot of the best model's feature importances. What are this model's top 3 features in order of descending importance?** 
+**2.6) Create a plot of the best model's feature importances.** 
 
 _Hint: To create the plot, pass the appropriate parameters to the function above._
 
@@ -394,6 +289,8 @@ _Hint: To create the plot, pass the appropriate parameters to the function above
 ```python
 # Your code here.
 ```
+
+**2.7) What are this model's top 3 features in order of descending importance?**
 
 
 ```python
@@ -427,23 +324,14 @@ X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.3, random_
 
 Call the PCA instance you'll create `wine_pca`. Set `n_components=0.9` and make sure to use `random_state = 42`.
 
-_Hint: Make sure to include necessary imports for preprocessing the data!_
+_Hint: Make sure to include necessary imports for **preprocessing the data!**_
 
 
 ```python
 # Your code here 
 ```
 
-**3.2) What is the meaning of setting `n_components` to 0.9?** 
-
-_Hint: Look at the documentation for `PCA` in scikit-learn._
-
-
-```python
-# Your answer here
-```
-
-**3.3) How many principal components are there in the fitted PCA object?**
+**3.2) How many principal components are there in the fitted PCA object?**
 
 _Hint: Look at the list of attributes of trained `PCA` objects in the scikit-learn documentation_
 
@@ -453,11 +341,13 @@ _Hint: Look at the list of attributes of trained `PCA` objects in the scikit-lea
 print(None)
 ```
 
+*Hint: you should end up with 8 components.*
+
 Next, you'll reduce the dimensionality of the training data to the number of components that explain at least 90% of the variance in the data, and then you'll use this transformed data to fit a Random Forest classification model. 
 
 You'll compare the performance of the model trained on the PCA-extracted features to the performance of a model trained using all features without feature extraction.
 
-**3.4) Transform the training features into an array of reduced dimensionality using the `wine_pca` PCA object you've fit in the previous cell.** Call this array `X_train_pca`.
+**3.3) Transform the training features into an array of reduced dimensionality using the `wine_pca` PCA object you've fit in the previous cell.** Call this array `X_train_pca`.
 
 
 ```python
@@ -476,9 +366,9 @@ X_train_pca = pd.DataFrame(X_train_pca)
 X_train_pca.head()
 ```
 
-You will now use the PCA-extracted features to train a random forest classification model.
+#### You will now use the PCA-extracted features to train a random forest classification model.
 
-**3.5) Instantiate a vanilla Random Forest Classifier (call it `rfc`) and fit it to the transformed training data.** Set `random_state = 42`. 
+**3.4) Instantiate a vanilla Random Forest Classifier (call it `rfc`) and fit it to the transformed training data.** Set `random_state = 42`. 
 
 
 ```python
@@ -487,7 +377,7 @@ rfc = None
 rfc.fit(None, None)
 ```
 
-**3.6) Evaluate model performance on the test data and place model predictions in a variable called `y_pca_pred`.**
+**3.5) Evaluate model performance on the test data and place model predictions in a variable called `y_pca_pred`.**
 
 _Hint: Make sure to transform the test data the same way as you transformed the training data!!!_
 
@@ -516,7 +406,7 @@ y_pred = vanilla_rfc.predict(X_test)
 print(classification_report(y_test, y_pred))
 ```
 
-**3.7) Compare model performance. Did the overall accuracy of the model improve when using the transformed features?**
+**3.6) Compare model performance. Did the overall accuracy of the model improve when using the transformed features?**
 
 
 ```python
@@ -527,10 +417,17 @@ print(classification_report(y_test, y_pred))
 
 ### Clustering Algorithms: k-means and hierarchical agglomerative clustering
 
-**4.1) Using the gif below for reference, describe the steps of the k-means clustering algorithm. Compare to the way clusters are created using hierarchical agglomerative clustering.** 
-* If the gif doesn't run, you may access it via [this link](https://github.com/learn-co-curriculum/dsc-module-5-assessment/blob/master/images/good-centroid-start.gif).
+#### 4.1) Using the gif below for reference, describe the steps of the k-means clustering algorithm.
+* If the gif doesn't run, you may access it via [this link](images/centroid.gif).
 
-<img src='images/good-centroid-start.gif'>
+<img src='images/centroid.gif'>
+
+
+```python
+# Your answer here
+```
+
+#### 4.2) In a similar way, describe the process behind Hierarchical Agglomerative Clustering.
 
 
 ```python
@@ -554,12 +451,12 @@ wine = load_wine()
 X = pd.DataFrame(X, columns = wine.feature_names)
 ```
 
-**4.2) Write a function called `get_labels` that will find `k` clusters in a dataset of features `X`, and return the labels for each row of `X`.**
+**4.3) Write a function called `get_labels` that will find `k` clusters in a dataset of features `X`, and return the labels for each row of `X`.**
 
 _Hint: Within the function, you'll need to:_
-* _instantiate a k-means clustering model (use `random_state = 1` for reproducibility),_ 
-* _fit the model to the data, and_
-* _return the labels for each point._
+* instantiate a k-means clustering model (use `random_state = 1` for reproducibility),
+* fit the model to the data, and
+* return the labels for each point.
 
 
 ```python
@@ -576,7 +473,7 @@ def get_labels(k, X):
     pass 
 ```
 
-**4.3) Fit the k-means algorithm to the wine data for k values in the range 2 to 9 using the function you've written above. Obtain the silhouette scores for each trained k-means clustering model, and place the values in a list called `silhouette_scores`.** 
+**4.4) Fit the k-means algorithm to the wine data for k values in the range 2 to 9 using the function you've written above. Obtain the silhouette scores for each trained k-means clustering model, and place the values in a list called `silhouette_scores`.** 
 
 We have provided you with some starter code in the cell below.
 
@@ -606,7 +503,9 @@ plt.xlabel('k (number of clusters)')
 plt.ylabel('silhouette score')
 ```
 
-**4.4) Which value of k would you choose based on the plot of silhouette scores? How does this number compare to the number of classes in the wine dataset?**
+**4.5) Which value of k would you choose based on the plot of silhouette scores? How does this number compare to the number of classes in the wine dataset?**
+
+Hint: this number should be <= 5.  If it's not, check your answer in the previous section.
 
 
 ```python
