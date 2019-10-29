@@ -7,8 +7,6 @@ Welcome to your Module 5 Assessment. You will be tested for your understanding o
 
 The goal here is to demonstrate your knowledge. Showing that you know things about certain concepts and how to apply different methods is more important than getting the best model.
 
-You will have up to 120 minutes to complete this assessment.
-
 The sections of the assessment are:
 
 - Decision Trees
@@ -20,7 +18,7 @@ The sections of the assessment are:
 > Please use your own words, even if you consult another source to help you craft your response. Short answer questions are not necessarily being assessed on grammatical correctness or sentence structure, but do your best to communicate your answers clearly!
 
 
-## Decision Trees
+## Decision Trees [Suggested Time: 15 min]
 
 ### Concepts 
 You're given a dataset of **30** elements, 15 of which belong to a positive class (denoted by *`+`* ) and 15 of which do not (denoted by `-`). These elements are described by two attributes, A and B, that can each have either one of two values, true or false. 
@@ -32,7 +30,7 @@ The diagrams below show the result of splitting the dataset by attribute: the di
 **1.1) Which one of the two attributes resulted in the best split of the original data? How do you select the best attribute to split a tree at each node?** _(Hint: Mention splitting criteria)_
 
 
-```python
+```
 # Your answer here 
 ```
 
@@ -55,7 +53,7 @@ The features and target variables are not normalized.
 In the cells below, we import `pandas` and `numpy` for you, and we load the data into a pandas DataFrame. We also include code to inspect the first five rows and get the shape of the DataFrame.
 
 
-```python
+```
 import pandas as pd 
 import numpy as np 
 
@@ -65,13 +63,13 @@ df = pd.read_excel(filename)
 ```
 
 
-```python
+```
 # Inspect the first five rows of the dataframe
 df.head()
 ```
 
 
-```python
+```
 # Get the shape of the dataframe 
 df.shape
 ```
@@ -81,7 +79,7 @@ Before fitting any models, you need to create training and testing splits for th
 Below, we split the data into features and target ('PE') for you. 
 
 
-```python
+```
 X = df[df.columns.difference(['PE'])]
 y = df['PE']
 ```
@@ -89,7 +87,7 @@ y = df['PE']
 **1.2) Split the data into training and test sets. Create training and test sets with `test_size=0.5` and `random_state=1`.** 
 
 
-```python
+```
 # Your code here. Replace None with appropriate code. 
 
 X_train, X_test, y_train, y_test = None
@@ -98,14 +96,14 @@ X_train, X_test, y_train, y_test = None
 **1.3) Fit a vanilla decision tree regression model with scikit-learn to the training data.** Set `random_state = 1` for reproducibility. **Evaluate the model on the test data.** 
 
 
-```python
+```
 # Your code here 
 ```
 
 **1.4) Obtain the mean squared error, mean absolute error, and coefficient of determination (r2 score) of the predictions on the test set.** _Hint: Look at the `sklearn.metrics` module._
 
 
-```python
+```
 # Your code here. Replace None with appropriate code. 
 
 print("Mean Squared Error:", None)
@@ -122,18 +120,18 @@ For this next section feel free to refer to the scikit learn documentation on [d
 **1.5) Add hyperparameters to a a new decision tree and fit it to our training data and evaluate the model with the test data.**
 
 
-```python
+```
 # Your code here 
 ```
 
 **1.6) Obtain the mean squared error, mean absolute error, and coefficient of determination (r2 score) of the predictions on the test set. Did this improve your previous model? (It's ok if it didn't)**
 
 
-```python
+```
 # Your answer and explanation here
 ```
 
-## Ensemble Methods
+## Ensemble Methods [Suggested Time: 20 min]
 
 ### Introduction to Ensemble Methods
 
@@ -142,7 +140,7 @@ For this next section feel free to refer to the scikit learn documentation on [d
 _Hint: Your answer should discuss bagging and the subspace sampling method._
 
 
-```python
+```
 # Your answer here
 ```
 
@@ -155,7 +153,7 @@ After finding the best estimator, you will interpret the best model's feature im
 In the cells below, we have loaded the relevant imports and the wine data for you. 
 
 
-```python
+```
 # Relevant imports 
 from sklearn.datasets import load_wine
 
@@ -171,24 +169,24 @@ df = pd.concat([X, y.to_frame()], axis=1)
 In the cells below, we inspect the first five rows of the dataframe and compute the dataframe's shape.
 
 
-```python
+```
 df.head()
 ```
 
 
-```python
+```
 df.shape
 ```
 
 We also get descriptive statistics for the dataset features, and obtain the distribution of classes in the dataset. 
 
 
-```python
+```
 X.describe()
 ```
 
 
-```python
+```
 y.value_counts().sort_index()
 ```
 
@@ -197,7 +195,7 @@ You will now perform hyper-parameter tuning for a Random Forest classifier.
 **2.2) Construct a `param_grid` dictionary to pass to `GridSearchCV` when instantiating the object. Choose at least 3 hyper-parameters to tune and 3 values for each.** 
 
 
-```python
+```
 # Replace None with relevant code 
 param_grid = None
 ```
@@ -207,7 +205,7 @@ Now that you have created the `param_grid` dictionary of hyperparameters, let's 
 In the cell below, we include the relevant imports for you.
 
 
-```python
+```
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.model_selection import GridSearchCV
 ```
@@ -215,7 +213,7 @@ from sklearn.model_selection import GridSearchCV
 **2.3) Create an instance of a Random Forest classifier estimator; call it `rfc`.** Make sure to set `random_state=42` for reproducibility. 
 
 
-```python
+```
 # Replace None with appropriate code
 rfc = None
 ```
@@ -226,7 +224,7 @@ rfc = None
 * The fitting process should take 10 - 15 seconds to complete. 
 
 
-```python
+```
 # Replace None with appropriate code 
 cv_rfc = None 
 
@@ -238,7 +236,7 @@ cv_rfc.fit(None, None)
 _Hint: Explore the documentation for GridSearchCV._ 
 
 
-```python
+```
 # Replace None with appropriate code 
 None 
 ```
@@ -246,14 +244,14 @@ None
 In the cell below, we create a variable `best_model` that holds the best model found by the grid search.
 
 
-```python
+```
 best_model = cv_rfc.best_estimator_
 ```
 
 Next, we give you a function that creates a horizontal bar plot to visualize the feature importances of a model, sorted in descending order. 
 
 
-```python
+```
 import matplotlib.pyplot as plt 
 %matplotlib inline 
 
@@ -286,18 +284,18 @@ def create_plot_of_feature_importances(model, X):
 _Hint: To create the plot, pass the appropriate parameters to the function above._
 
 
-```python
+```
 # Your code here.
 ```
 
 **2.7) What are this model's top 3 features in order of descending importance?**
 
 
-```python
+```
 # Your answer here 
 ```
 
-## Principal Components Analysis
+## Principal Components Analysis [Suggested Time: 20 min]
 
 ### Training a model with PCA-extracted features
 
@@ -308,7 +306,7 @@ You'll use the principal components of the dataset as features in a machine lear
 In the cell below, we import the data for you, and we split the data into training and test sets. 
 
 
-```python
+```
 from sklearn.datasets import load_wine
 X, y = load_wine(return_X_y=True)
 
@@ -327,7 +325,7 @@ Call the PCA instance you'll create `wine_pca`. Set `n_components=0.9` and make 
 _Hint: Make sure to include necessary imports for **preprocessing the data!**_
 
 
-```python
+```
 # Your code here 
 ```
 
@@ -336,7 +334,7 @@ _Hint: Make sure to include necessary imports for **preprocessing the data!**_
 _Hint: Look at the list of attributes of trained `PCA` objects in the scikit-learn documentation_
 
 
-```python
+```
 # Replace None with appropriate code 
 print(None)
 ```
@@ -350,7 +348,7 @@ You'll compare the performance of the model trained on the PCA-extracted feature
 **3.3) Transform the training features into an array of reduced dimensionality using the `wine_pca` PCA object you've fit in the previous cell.** Call this array `X_train_pca`.
 
 
-```python
+```
 # Replace None with appropriate code  
 X_train_pca = None
 ```
@@ -358,7 +356,7 @@ X_train_pca = None
 Next, we create a dataframe from this array of transformed features and we inspect the first five rows of the dataframe for you. 
 
 
-```python
+```
 # Create a dataframe from this array of transformed features 
 X_train_pca = pd.DataFrame(X_train_pca)
 
@@ -371,7 +369,7 @@ X_train_pca.head()
 **3.4) Instantiate a vanilla Random Forest Classifier (call it `rfc`) and fit it to the transformed training data.** Set `random_state = 42`. 
 
 
-```python
+```
 # Replace None with appropriate code 
 rfc = None
 rfc.fit(None, None)
@@ -382,14 +380,14 @@ rfc.fit(None, None)
 _Hint: Make sure to transform the test data the same way as you transformed the training data!!!_
 
 
-```python
+```
 # Your code here 
 ```
 
 In the cell below, we print the classification report for the model performance on the test data. 
 
 
-```python
+```
 from sklearn.metrics import classification_report
 print(classification_report(y_test, y_pca_pred))
 ```
@@ -397,7 +395,7 @@ print(classification_report(y_test, y_pca_pred))
 Run the cell below to fit a vanilla Random Forest Classifier to the untransformed training data,  evaluate its performance on the untransformed test data, and print the classification report for the model. 
 
 
-```python
+```
 vanilla_rfc = RandomForestClassifier(random_state=42)
 vanilla_rfc.fit(X_train, y_train)
 
@@ -409,11 +407,11 @@ print(classification_report(y_test, y_pred))
 **3.6) Compare model performance. Did the overall accuracy of the model improve when using the transformed features?**
 
 
-```python
+```
 # Your answer here 
 ```
 
-## Clustering 
+## Clustering [Suggested Time: 30 min]
 
 ### Clustering Algorithms: k-means and hierarchical agglomerative clustering
 
@@ -423,14 +421,14 @@ print(classification_report(y_test, y_pred))
 <img src='images/centroid.gif'>
 
 
-```python
+```
 # Your answer here
 ```
 
 #### 4.2) In a similar way, describe the process behind Hierarchical Agglomerative Clustering.
 
 
-```python
+```
 # Your answer here
 ```
 
@@ -443,7 +441,7 @@ You will use scikit-learn to fit k-means clustering models, and you will determi
 We load the wine dataset for you in the cell below. 
 
 
-```python
+```
 from sklearn.datasets import load_wine
 
 X, y = load_wine(return_X_y=True)
@@ -459,7 +457,7 @@ _Hint: Within the function, you'll need to:_
 * return the labels for each point.
 
 
-```python
+```
 # Replace None and pass with appropriate code
 def get_labels(k, X):
     
@@ -480,7 +478,7 @@ We have provided you with some starter code in the cell below.
 _Hints: What imports do you need? Do you need to pre-process the data in any way before fitting the k-means clustering algorithm?_ 
 
 
-```python
+```
 # Your code here
 
 silhouette_scores= []
@@ -496,7 +494,7 @@ for k in range(2, 10):
 Run the cell below to plot the silhouette scores obtained for each different value of k against k, the number of clusters we asked the algorithm to find. 
 
 
-```python
+```
 plt.plot(range(2, 10), silhouette_scores, marker='o')
 plt.title('Silhouette scores vs number of clusters')
 plt.xlabel('k (number of clusters)')
@@ -508,6 +506,6 @@ plt.ylabel('silhouette score')
 Hint: this number should be <= 5.  If it's not, check your answer in the previous section.
 
 
-```python
+```
 # Your answer here 
 ```
